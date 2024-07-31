@@ -8,7 +8,7 @@
   {},
   "deprecated": false,
   "description": "Convenient Functions for the Free jqGrid",
-  "homepage": "https://w3.calantas.org/free-dockers/jqgrid_utils",
+  "homepage": "https://github.com/myridia/jqgrid_utils",
   "license": "GPL-3.0-or-later",
   "main": "jqgrid_utils.js",
   "name": "jqgrid_utils",
@@ -23,7 +23,7 @@
   "repository":
   {
     "type": "hg",
-    "url": "https://calantas.org/jqgrid_utils"
+    "url": "https://github.com/myridia/jqgrid_utils"
   },
   "scripts":
   {
