@@ -18,5 +18,5 @@ Convenient Functions for free jqGrid
 
 ```
 
-Source: https://w3.calantas.org/free-dockers/jqgrid_utils/
+Source: https://github.com/myridia/jqgrid_utils/actions
 
