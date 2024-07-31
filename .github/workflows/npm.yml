@@ -1,5 +1,4 @@
 name: Publish Package to npmjs
-name: Deploy to WordPress.org
 on:
   push:
     tags:
