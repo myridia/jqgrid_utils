@@ -1,6 +1,7 @@
 name: Publish Package to npmjs
 on: push
 jobs:
+  - if: github.repository_owner == 'myridia'
   build:
     runs-on: ubuntu-latest
     permissions:
