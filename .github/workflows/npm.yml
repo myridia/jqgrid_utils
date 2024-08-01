@@ -2,15 +2,13 @@ name: Publish Package to npmjs
 on: push
 jobs:
   build:
+    if: github.repository_owner == 'myridia'
     runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
-    if: github.repository_owner == 'myridia'
-
     steps:
       - uses: actions/checkout@v4
-
       # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v4
         with:
