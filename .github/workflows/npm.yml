@@ -6,8 +6,9 @@ jobs:
     permissions:
       contents: read
       id-token: write
+    if: github.repository_owner == 'myridia'
+
     steps:
-      - if: github.repository_owner == 'myridia'
       - uses: actions/checkout@v4
 
       # Setup .npmrc file to publish to npm
