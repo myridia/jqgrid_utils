@@ -18,7 +18,7 @@ Convenient Functions for free jqGrid
 
 ```
 
-Source: https://w3.calantas.org/free-dockers/jqgrid_utils/
+Source: https://github.com/myridia/jqgrid_utils/actions
 
 <a name="module_Jqgrid_utils"></a>
 
@@ -42,6 +42,7 @@ A module for Jqgrid_utils
     * [module.exports#get_filled_cell_table_data(_grid, fields)](#exp_module_Jqgrid_utils--module.exports+get_filled_cell_table_data) ⇒ <code>array</code> ⏏
     * [module.exports#get_filled_cell_data(_grid, fields)](#exp_module_Jqgrid_utils--module.exports+get_filled_cell_data) ⇒ <code>object</code> ⏏
     * [module.exports#set_link(col_model, edit_field, url)](#exp_module_Jqgrid_utils--module.exports+set_link) ⇒ <code>object</code> ⏏
+    * [module.exports#hide_all_columns_except(col_model, fields)](#exp_module_Jqgrid_utils--module.exports+hide_all_columns_except) ⇒ <code>object</code> ⏏
     * [module.exports#hide_column(col_model, field)](#exp_module_Jqgrid_utils--module.exports+hide_column) ⇒ <code>object</code> ⏏
     * [module.exports#s_grid_set_caption(_grid, data)](#exp_module_Jqgrid_utils--module.exports+s_grid_set_caption) ⏏
     * [module.exports#grid_set_caption(_grid, data)](#exp_module_Jqgrid_utils--module.exports+grid_set_caption) ⏏
@@ -58,6 +59,7 @@ A module for Jqgrid_utils
     * [module.exports#s_hide_del_icon()](#exp_module_Jqgrid_utils--module.exports+s_hide_del_icon) ⏏
     * [module.exports#hide_del_icon()](#exp_module_Jqgrid_utils--module.exports+hide_del_icon) ⏏
     * [module.exports#add_link_details_csv(col_model, url, edit_field, attr, keys, format, seperator)](#exp_module_Jqgrid_utils--module.exports+add_link_details_csv) ⏏
+    * [module.exports#set_styles(obj, style_column)](#exp_module_Jqgrid_utils--module.exports+set_styles) ⏏
     * [module.exports#add_link_details(col_model, url, edit_field, attr, keys)](#exp_module_Jqgrid_utils--module.exports+add_link_details) ⏏
     * [module.exports#add_link_details_separator(col_model, url, edit_field, attr, keys)](#exp_module_Jqgrid_utils--module.exports+add_link_details_separator) ⏏
     * [module.exports#add_link_separator(col_model, url, edit_field, fields)](#exp_module_Jqgrid_utils--module.exports+add_link_separator) ⏏
@@ -392,6 +394,23 @@ var jqu = new Jqgrid_utils();
 let _data = await jqu.get_filled_cell_data(this,["P-","bulk","wholesale"]);
 console.log(_data);
 ```
+<a name="exp_module_Jqgrid_utils--module.exports+hide_all_columns_except"></a>
+
+### module.exports#hide\_all\_columns\_except(col_model, fields) ⇒ <code>object</code> ⏏
+Hide all columns execpt column
+
+**Kind**: Exported function  
+**Returns**: <code>object</code> - col_model  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| col_model | <code>object</code> | col_model of the grid |
+| fields | <code>array</code> | array of names to not to  hide |
+
+**Example**  
+```js
+col_model = await jqu.hide_all_columns_except(col_model,['supplier','customer']);
+```
 <a name="exp_module_Jqgrid_utils--module.exports+hide_column"></a>
 
 ### module.exports#hide\_column(col_model, field) ⇒ <code>object</code> ⏏
@@ -407,11 +426,8 @@ Hide a col_model column before load the grid
 
 **Example**  
 ```js
-if(filter['_filter'] == 'ch_p_higher_ch_plus_10pc')
-    {
-      col_model = await jqu.hide_column(col_model,'wholesale');
-      col_model = await jqu.hide_column(col_model,'wholesale_formula');
-    }
+col_model = await jqu.hide_column(col_model,'wholesale');
+  col_model = await jqu.hide_column(col_model,'wholesale_formula');
 ```
 <a name="exp_module_Jqgrid_utils--module.exports+s_grid_set_caption"></a>
 
@@ -686,6 +702,25 @@ Convert a cell into a link/url with data from another cell and spit the value by
 var jqu = new Jqgrid_utils();
 col_model = await jqu.add_link_details_csv(col_model, host + '/html/report.html' , 'tags','target="_blank"',{"tags":"tags"},',');
 ```
+<a name="exp_module_Jqgrid_utils--module.exports+set_styles"></a>
+
+### module.exports#set\_styles(obj, style_column) ⏏
+Set styles to individual cells, what are defined in a dedicated column
+
+**Kind**: Exported function  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| obj | <code>object</code> |  | grid object |
+| style_column | <code>string</code> | <code>&quot;styles&quot;</code> | name of the column what includes the style values what need to be in a strinify  json format |
+
+**Example**  
+```js
+var jqu = new Jqgrid_utils();
+       loadComplete: async function() {
+        await jqu.set_styles(this);
+        },
+```
 <a name="exp_module_Jqgrid_utils--module.exports+add_link_details"></a>
 
 ### module.exports#add\_link\_details(col_model, url, edit_field, attr, keys) ⏏
@@ -752,6 +787,8 @@ var jqu = new Jqgrid_utils();
             'fields':{'style':'style'}
         }
     ]);
+ //other example
+ col_model = await jqu.add_link_separator(col_model, 'https://wiki.salamander-jewelry.net/index.php/grid_loss' , 'e',[{'field':'e'}],'target="_blank"');
 ```
 <a name="exp_module_Jqgrid_utils--module.exports+__cell_format"></a>
 
@@ -814,7 +851,7 @@ await jqu.subgrid(_id, false, data_url, col_model2,'Order Lines for ' + row_data
 
 **Example**  
 ```js
-col_model = await jqu.add_image(col_model, 'image', 60, false);
+col_model = await jqu.add_image(col_model, image_field, 60, false);
 ```
 <a name="exp_module_Jqgrid_utils--module.exports+set_filter"></a>
 
