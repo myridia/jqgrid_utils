@@ -1184,6 +1184,33 @@ col_model = await jqu.add_link_details_csv(col_model, host + '/html/report.html'
 
 
 /**
+* Compare 2 columns and give them a style class  when they have different content
+* http://www.trirand.com/jqgridwiki/doku.php?id=wiki:methods
+@alias module:Jqgrid_utils
+@param {object} - grid object
+@param {string} - first column
+@param {string} - second column
+@param {string} - css class name 
+@example 
+loadComplete: async function()
+{
+  await jqu.compare(this,'value','value_report','greenlight');
+  }
+  
+*/
+    async compare(obj, column1, column2, style)
+    {
+        const rows = jQuery(obj).jqGrid('getGridParam','data');
+        for(let i in rows) {
+            if( rows[i][column1] != rows[i][column2] )
+            {
+                jQuery(obj).jqGrid('setCell',rows[i]['id'], column1, "" ,'greenlight');
+                jQuery(obj).jqGrid('setCell',rows[i]['id'], column2, "" ,'greenlight');
+            }
+            }            
+      }
+
+/**
 * Set styles to individual cells, what are defined in a dedicated column
 @alias module:Jqgrid_utils
 @param {object} - grid object
@@ -1213,7 +1240,7 @@ var jqu = new Jqgrid_utils();
                     }
                 }
             }            
-
+  
 }
 
 
