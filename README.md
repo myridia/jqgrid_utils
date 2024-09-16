@@ -37,6 +37,7 @@ A module for Jqgrid_utils
     * [module.exports#_date112_to_DMY(cell_value, seperator)](#exp_module_Jqgrid_utils--module.exports+_date112_to_DMY) ⏏
     * [module.exports#date112_to_DMY(col_model, edit_field, seperator)](#exp_module_Jqgrid_utils--module.exports+date112_to_DMY) ⏏
     * [module.exports#add_formatter(col_model, edit_field, formatter)](#exp_module_Jqgrid_utils--module.exports+add_formatter) ⏏
+    * [module.exports#natural_sort(col_model, column_name)](#exp_module_Jqgrid_utils--module.exports+natural_sort) ⇒ <code>array</code> ⏏
     * [module.exports#add_html_formatter(col_model, edit_field, html)](#exp_module_Jqgrid_utils--module.exports+add_html_formatter) ⇒ <code>array</code> ⏏
     * [module.exports#add_ok_button(col_model, fields)](#exp_module_Jqgrid_utils--module.exports+add_ok_button) ⇒ <code>array</code> ⏏
     * [module.exports#get_filled_cell_table_data(_grid, fields)](#exp_module_Jqgrid_utils--module.exports+get_filled_cell_table_data) ⇒ <code>array</code> ⏏
@@ -59,6 +60,7 @@ A module for Jqgrid_utils
     * [module.exports#s_hide_del_icon()](#exp_module_Jqgrid_utils--module.exports+s_hide_del_icon) ⏏
     * [module.exports#hide_del_icon()](#exp_module_Jqgrid_utils--module.exports+hide_del_icon) ⏏
     * [module.exports#add_link_details_csv(col_model, url, edit_field, attr, keys, format, seperator)](#exp_module_Jqgrid_utils--module.exports+add_link_details_csv) ⏏
+    * [module.exports#compare(obj, column1, column2, style)](#exp_module_Jqgrid_utils--module.exports+compare) ⏏
     * [module.exports#set_styles(obj, style_column)](#exp_module_Jqgrid_utils--module.exports+set_styles) ⏏
     * [module.exports#add_link_details(col_model, url, edit_field, attr, keys)](#exp_module_Jqgrid_utils--module.exports+add_link_details) ⏏
     * [module.exports#add_link_details_separator(col_model, url, edit_field, attr, keys)](#exp_module_Jqgrid_utils--module.exports+add_link_details_separator) ⏏
@@ -300,6 +302,24 @@ Add Formatter
 ```js
 var jqu = new Jqgrid_utils();
 col_model = await jqu.add_formatter(col_model,'select',{ formatter: "select", formatoptions: {value: "1:ok;0:fail", defaultValue: "1" }})
+```
+<a name="exp_module_Jqgrid_utils--module.exports+natural_sort"></a>
+
+### module.exports#natural\_sort(col_model, column_name) ⇒ <code>array</code> ⏏
+Natural Sort Column
+
+**Kind**: Exported function  
+**Returns**: <code>array</code> - - col_model  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| col_model | <code>array</code> | grid col_model |
+| column_name | <code>string</code> | string columns names for natural sorting |
+
+**Example**  
+```js
+var jqu = new Jqgrid_utils();
+col_model = await jqu.natural_sort(col_model,'colunmename');
 ```
 <a name="exp_module_Jqgrid_utils--module.exports+add_html_formatter"></a>
 
@@ -701,6 +721,28 @@ Convert a cell into a link/url with data from another cell and spit the value by
 ```js
 var jqu = new Jqgrid_utils();
 col_model = await jqu.add_link_details_csv(col_model, host + '/html/report.html' , 'tags','target="_blank"',{"tags":"tags"},',');
+```
+<a name="exp_module_Jqgrid_utils--module.exports+compare"></a>
+
+### module.exports#compare(obj, column1, column2, style) ⏏
+Compare 2 columns and give them a style class  when they have different content
+http://www.trirand.com/jqgridwiki/doku.php?id=wiki:methods
+
+**Kind**: Exported function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| obj | <code>object</code> | grid object |
+| column1 | <code>string</code> | first column |
+| column2 | <code>string</code> | second column |
+| style | <code>string</code> | css class name |
+
+**Example**  
+```js
+loadComplete: async function()
+{
+  await jqu.compare(this,'value','value_report','greenlight');
+  }
 ```
 <a name="exp_module_Jqgrid_utils--module.exports+set_styles"></a>
 
