@@ -16,7 +16,6 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm install --package-lock-only
       - run: npm ci
-      - run: echo  ${{ secrets.NPM_TOKEN }}
       - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
