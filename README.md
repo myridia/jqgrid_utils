@@ -374,7 +374,7 @@ Get the filled cell data
 **Example**  
 ```js
 var jqu = new Jqgrid_utils();
-col_model = await jqu.set_link(col_model,'av0_code','url_code','target="blank"');
+col_model = await jqu.get_filled_cell_table_dat("#gridname","fieldname");
 ```
 <a name="exp_module_Jqgrid_utils--module.exports+get_filled_cell_data"></a>
 
@@ -392,7 +392,7 @@ Get the filled cell data
 **Example**  
 ```js
 var jqu = new Jqgrid_utils();
-col_model = await jqu.set_link(col_model,'av0_code','url_code','target="blank"');
+let _data = await jqu.get_filled_cell_data(this,["P-","bulk","wholesale"]);
 ```
 <a name="exp_module_Jqgrid_utils--module.exports+set_link"></a>
 
@@ -411,7 +411,7 @@ Add an URL from the data to a specific cell/column
 **Example**  
 ```js
 var jqu = new Jqgrid_utils();
-let _data = await jqu.get_filled_cell_data(this,["P-","bulk","wholesale"]);
+col_model = await jqu.set_link(col_model,'av0_code','url_code','target="blank"');
 console.log(_data);
 ```
 <a name="exp_module_Jqgrid_utils--module.exports+hide_all_columns_except"></a>
