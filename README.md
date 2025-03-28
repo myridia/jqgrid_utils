@@ -411,7 +411,7 @@ Add an URL from the data to a specific cell/column
 **Example**  
 ```js
 var jqu = new Jqgrid_utils();
-col_model = await jqu.set_link(col_model,'av0_code','url_code','target="blank"');
+col_model = await jqu.set_link(col_model,'field_get_url','field_with_the_url','target="blank"');
 console.log(_data);
 ```
 <a name="exp_module_Jqgrid_utils--module.exports+hide_all_columns_except"></a>

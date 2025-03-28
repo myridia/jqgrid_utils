@@ -653,7 +653,7 @@ let _data = await jqu.get_filled_cell_data(this,["P-","bulk","wholesale"]);
   }
 
   /**
-* Add an URL from the data to a specific cell/column
+* Add an URL from the data to a specific cell/column 
 @alias module:Jqgrid_utils
 @param {object} - col_model of the grid
 @param {string} - name of the column what should get convert to the url
@@ -661,7 +661,7 @@ let _data = await jqu.get_filled_cell_data(this,["P-","bulk","wholesale"]);
 @returns {object} https://foo.bar.com/av0_code/bar 
 @example
 var jqu = new Jqgrid_utils();
-col_model = await jqu.set_link(col_model,'av0_code','url_code','target="blank"');
+col_model = await jqu.set_link(col_model,'field_get_url','field_with_the_url','target="blank"');
 console.log(_data);
 */
   async set_link(col_model, edit_field, url, attr = "") {
