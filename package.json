@@ -29,9 +29,7 @@
   {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-<<<<<<< HEAD
-  "version": "1.32.0"
-=======
-  "version": "1.31.0"
->>>>>>> b95fbf203ec0b892133f1543054d9bf4e96f2525
+
+  "version": "1.33.0"
+
 }
