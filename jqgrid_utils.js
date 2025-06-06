@@ -16,6 +16,111 @@ module.exports = class Vanilla_website_utils {
   }
 
   /**
+* Syncron Alias grid_sum_on 
+@alias module:Jqgrid_utils
+*/
+  async _grid_substract_on(
+    grid,
+    minuend = [],
+    subtrahend = [],
+    difference,
+    no_negative = false,
+  ) {
+    return await this.grid_substract_on(
+      grid,
+      minuend,
+      subtrahend,
+      difference,
+      no_negative,
+    );
+  }
+
+  /**
+* Sum the columns values together 
+@alias module:Jqgrid_utils
+@param {object} - Grid Object (required)
+@param {array} - string array list of field_names used as minuend(number from which the other number is subtracted)
+@param {array} - string array list of field_names used as subtrahend(number which is to be subtracted from the minuend)
+@param {string} - string field name for the difference(number which is to be subtracted from the minuend)
+@param {bolen} - true or 1 to not show negative numbers   
+
+@example
+var jqu = new Jqgrid_utils({page:page});
+gridComplete: function () {
+        jqu._jqu._grid_sum_on(this, [
+          "qty_icollect",
+          "qty_ordered",
+          "need_for_qty_ordered",
+          "wait_icollect",
+        ]);
+      },
+*/
+  async grid_substract_on(
+    grid,
+    minuend = [],
+    subtrahend = [],
+    difference,
+    no_negative = false,
+  ) {
+    let $self = jQuery(grid);
+    let rows = $self.jqGrid("getGridParam", "data");
+    let footer = { invdate: "Total" };
+    let _minuend = 0.0;
+    let _subtrahend = 0.0;
+    for (let i in minuend) {
+      let sum = 0;
+      for (let r in rows) {
+        if (rows[r].hasOwnProperty(minuend[i])) {
+          let val = rows[r][minuend[i]];
+          if (typeof val === "string") {
+            if (is_digit(val)) {
+              val = parseFloat(val);
+            }
+          }
+          sum += val;
+        }
+      }
+      if (sum != Math.floor(sum)) {
+        sum = sum.toFixed(2);
+      }
+      footer[minuend[i]] = sum;
+      _minuend = sum;
+    }
+
+    for (let i in subtrahend) {
+      let sum = 0;
+      for (let r in rows) {
+        if (rows[r].hasOwnProperty(subtrahend[i])) {
+          let val = rows[r][subtrahend[i]];
+          if (typeof val === "string") {
+            if (is_digit(val)) {
+              val = parseFloat(val);
+            }
+          }
+          sum += val;
+        }
+      }
+      if (sum != Math.floor(sum)) {
+        sum = sum.toFixed(2);
+      }
+      footer[subtrahend[i]] = sum;
+      _subtrahend = sum;
+    }
+
+    let diff = _minuend - _subtrahend;
+    if (no_negative) {
+      if (diff < 0) {
+        diff = 0;
+      }
+    }
+    footer[difference] = diff;
+
+    $self.jqGrid("footerData", "set", footer);
+
+    return footer;
+  }
+
+  /**
 * Syncron Alias grid_ratio_on 
 @alias module:Jqgrid_utils
 */
