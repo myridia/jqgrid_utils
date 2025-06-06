@@ -27,9 +27,13 @@ A module for Jqgrid_utils
 
 
 * [Jqgrid_utils](#module_Jqgrid_utils)
+    * [module.exports#_grid_ratio_on()](#exp_module_Jqgrid_utils--module.exports+_grid_ratio_on) ⏏
     * [module.exports#grid_ratio_on(grid, fraction_col, denominator_col, ratio_col)](#exp_module_Jqgrid_utils--module.exports+grid_ratio_on) ⏏
+    * [module.exports#_grid_sum_on()](#exp_module_Jqgrid_utils--module.exports+_grid_sum_on) ⏏
     * [module.exports#grid_sum_on(grid, fields)](#exp_module_Jqgrid_utils--module.exports+grid_sum_on) ⏏
+    * [module.exports#_grid_avg_on()](#exp_module_Jqgrid_utils--module.exports+_grid_avg_on) ⏏
     * [module.exports#grid_avg_on(grid, fields)](#exp_module_Jqgrid_utils--module.exports+grid_avg_on) ⏏
+    * [module.exports#_grid_percent_on()](#exp_module_Jqgrid_utils--module.exports+_grid_percent_on) ⏏
     * [module.exports#grid_percent_on(grid, obj)](#exp_module_Jqgrid_utils--module.exports+grid_percent_on) ⏏
     * [module.exports#update_row_to_api(_self, api, _ids, row)](#exp_module_Jqgrid_utils--module.exports+update_row_to_api) ⏏
     * [module.exports#delete_row_to_api(_self, api, rowid, _ids, data)](#exp_module_Jqgrid_utils--module.exports+delete_row_to_api) ⏏
@@ -75,6 +79,12 @@ A module for Jqgrid_utils
     * [module.exports#set_filter(grid, data, fx, append_to)](#exp_module_Jqgrid_utils--module.exports+set_filter) ⏏
     * [module.exports#_filter()](#exp_module_Jqgrid_utils--module.exports+_filter) ⏏
 
+<a name="exp_module_Jqgrid_utils--module.exports+_grid_ratio_on"></a>
+
+### module.exports#\_grid\_ratio\_on() ⏏
+Syncron Alias grid_ratio_on
+
+**Kind**: Exported function  
 <a name="exp_module_Jqgrid_utils--module.exports+grid_ratio_on"></a>
 
 ### module.exports#grid\_ratio\_on(grid, fraction_col, denominator_col, ratio_col) ⏏
@@ -97,6 +107,12 @@ var jqu = new Jqgrid_utils({page:page});
        	jqu._grid_ratio_on(this, 'actual_days', 'plan_days', 'qc_eta_ratio');
       },
 ```
+<a name="exp_module_Jqgrid_utils--module.exports+_grid_sum_on"></a>
+
+### module.exports#\_grid\_sum\_on() ⏏
+Syncron Alias grid_sum_on
+
+**Kind**: Exported function  
 <a name="exp_module_Jqgrid_utils--module.exports+grid_sum_on"></a>
 
 ### module.exports#grid\_sum\_on(grid, fields) ⏏
@@ -121,6 +137,12 @@ gridComplete: function () {
         ]);
       },
 ```
+<a name="exp_module_Jqgrid_utils--module.exports+_grid_avg_on"></a>
+
+### module.exports#\_grid\_avg\_on() ⏏
+Syncron Alias grid_avg_on
+
+**Kind**: Exported function  
 <a name="exp_module_Jqgrid_utils--module.exports+grid_avg_on"></a>
 
 ### module.exports#grid\_avg\_on(grid, fields) ⏏
@@ -142,6 +164,12 @@ var jqu = new Jqgrid_utils({page:page});
 	jqu._grid_avg_on(this, ['diff_plan_to_actual', 'days_early', 'days_late']);
       },
 ```
+<a name="exp_module_Jqgrid_utils--module.exports+_grid_percent_on"></a>
+
+### module.exports#\_grid\_percent\_on() ⏏
+Syncron Alias grid_percent_on
+
+**Kind**: Exported function  
 <a name="exp_module_Jqgrid_utils--module.exports+grid_percent_on"></a>
 
 ### module.exports#grid\_percent\_on(grid, obj) ⏏
