@@ -27,6 +27,10 @@ A module for Jqgrid_utils
 
 
 * [Jqgrid_utils](#module_Jqgrid_utils)
+    * [module.exports#grid_ratio_on(grid, fraction_col, denominator_col, ratio_col)](#exp_module_Jqgrid_utils--module.exports+grid_ratio_on) ⏏
+    * [module.exports#grid_sum_on(grid, fields)](#exp_module_Jqgrid_utils--module.exports+grid_sum_on) ⏏
+    * [module.exports#grid_avg_on(grid, fields)](#exp_module_Jqgrid_utils--module.exports+grid_avg_on) ⏏
+    * [module.exports#grid_percent_on(grid, obj)](#exp_module_Jqgrid_utils--module.exports+grid_percent_on) ⏏
     * [module.exports#update_row_to_api(_self, api, _ids, row)](#exp_module_Jqgrid_utils--module.exports+update_row_to_api) ⏏
     * [module.exports#delete_row_to_api(_self, api, rowid, _ids, data)](#exp_module_Jqgrid_utils--module.exports+delete_row_to_api) ⏏
     * [module.exports#append_seperator_link_column(col_model, url, field_value, base, attr, keys)](#exp_module_Jqgrid_utils--module.exports+append_seperator_link_column) ⏏
@@ -71,6 +75,97 @@ A module for Jqgrid_utils
     * [module.exports#set_filter(grid, data, fx, append_to)](#exp_module_Jqgrid_utils--module.exports+set_filter) ⏏
     * [module.exports#_filter()](#exp_module_Jqgrid_utils--module.exports+_filter) ⏏
 
+<a name="exp_module_Jqgrid_utils--module.exports+grid_ratio_on"></a>
+
+### module.exports#grid\_ratio\_on(grid, fraction_col, denominator_col, ratio_col) ⏏
+Get the ratio the columns values together
+
+**Kind**: Exported function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| grid | <code>object</code> | Grid Object (required) |
+| fraction_col | <code>string</code> | Column/Field Name for value 1 |
+| denominator_col | <code>string</code> | Column/Field Name for value 2 |
+| ratio_col | <code>string</code> | Column/Field Name to the set the target ratio |
+
+**Example**  
+```js
+var jqu = new Jqgrid_utils({page:page});
+      gridComplete: function()
+      {
+       	jqu._grid_ratio_on(this, 'actual_days', 'plan_days', 'qc_eta_ratio');
+      },
+```
+<a name="exp_module_Jqgrid_utils--module.exports+grid_sum_on"></a>
+
+### module.exports#grid\_sum\_on(grid, fields) ⏏
+Sum the columns values together
+
+**Kind**: Exported function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| grid | <code>object</code> | Grid Object (required) |
+| fields | <code>string</code> | Column/Field Name to sum |
+
+**Example**  
+```js
+var jqu = new Jqgrid_utils({page:page});
+gridComplete: function () {
+        jqu._jqu._grid_sum_on(this, [
+          "qty_icollect",
+          "qty_ordered",
+          "need_for_qty_ordered",
+          "wait_icollect",
+        ]);
+      },
+```
+<a name="exp_module_Jqgrid_utils--module.exports+grid_avg_on"></a>
+
+### module.exports#grid\_avg\_on(grid, fields) ⏏
+Average the column values together
+
+**Kind**: Exported function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| grid | <code>object</code> | Grid Object (required) |
+| fields | <code>array</code> | Column/Field Names to where the average of each column should be calculated |
+
+**Example**  
+```js
+var jqu = new Jqgrid_utils({page:page});
+
+   gridComplete: function()
+      {
+	jqu._grid_avg_on(this, ['diff_plan_to_actual', 'days_early', 'days_late']);
+      },
+```
+<a name="exp_module_Jqgrid_utils--module.exports+grid_percent_on"></a>
+
+### module.exports#grid\_percent\_on(grid, obj) ⏏
+Percent the columns values together
+
+**Kind**: Exported function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| grid | <code>object</code> | Grid Object (required) |
+| obj | <code>string</code> | Column/Field Name to sum |
+
+**Example**  
+```js
+var jqu = new Jqgrid_utils({page:page});
+gridComplete: function () {
+        jqu._jqu._grid_sum_on(this, [
+          "qty_icollect",
+          "qty_ordered",
+          "need_for_qty_ordered",
+          "wait_icollect",
+        ]);
+      },
+```
 <a name="exp_module_Jqgrid_utils--module.exports+update_row_to_api"></a>
 
 ### module.exports#update\_row\_to\_api(_self, api, _ids, row) ⏏
