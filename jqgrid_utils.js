@@ -16,6 +16,7 @@ module.exports = class Vanilla_website_utils {
   }
 
   /**
+<<<<<<< HEAD
 * Syncron Alias grid_sum_on 
 @alias module:Jqgrid_utils
 */
@@ -121,6 +122,8 @@ gridComplete: function () {
   }
 
   /**
+=======
+>>>>>>> b95fbf203ec0b892133f1543054d9bf4e96f2525
 * Syncron Alias grid_ratio_on 
 @alias module:Jqgrid_utils
 */
