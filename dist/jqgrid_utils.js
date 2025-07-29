@@ -1476,16 +1476,66 @@ col_model = await jqu.add_link_details_csv(col_model, host + '/html/report.html'
 @example 
 loadComplete: async function()
 {
-  await jqu.compare(this,'value','value_report','greenlight');
+  await jqu.compare(this,'first_column','second_column','redlight');
   }
   
 */
-  async compare(obj, column1, column2, style) {
+  async compare(obj, column1, column2, css_class) {
     const rows = jQuery(obj).jqGrid("getGridParam", "data");
     for (let i in rows) {
       if (rows[i][column1] != rows[i][column2]) {
-        jQuery(obj).jqGrid("setCell", rows[i]["id"], column1, "", "greenlight");
-        jQuery(obj).jqGrid("setCell", rows[i]["id"], column2, "", "greenlight");
+        jQuery(obj).jqGrid("setCell", rows[i]["id"], column1, "", css_class);
+        jQuery(obj).jqGrid("setCell", rows[i]["id"], column2, "", css_class);
+      }
+    }
+  }
+
+  /**
+* Compare 2 columns for smaller and give them a style class
+* http://www.trirand.com/jqgridwiki/doku.php?id=wiki:methods
+@alias module:Jqgrid_utils
+@param {object} - grid object
+@param {string} - first column
+@param {string} - second column
+@param {string} - css class name 
+@example 
+loadComplete: async function()
+{
+  await jqu.compare(this,'first_column','second_column','redlight');
+  }
+  
+*/
+  async compare_smaller(obj, column1, column2, css_class) {
+    const rows = jQuery(obj).jqGrid("getGridParam", "data");
+    for (let i in rows) {
+      if (rows[i][column1] < rows[i][column2]) {
+        jQuery(obj).jqGrid("setCell", rows[i]["id"], column1, "", css_class);
+        jQuery(obj).jqGrid("setCell", rows[i]["id"], column2, "", css_class);
+      }
+    }
+  }
+
+  /**
+* Compare 2 columns for bigger and give them a style class
+* http://www.trirand.com/jqgridwiki/doku.php?id=wiki:methods
+@alias module:Jqgrid_utils
+@param {object} - grid object
+@param {string} - first column
+@param {string} - second column
+@param {string} - css class name 
+@example 
+loadComplete: async function()
+{
+  await jqu.compare(this,'first_column','second_column','redlight');
+  }
+  
+*/
+  async compare_bigger(obj, column1, column2, css_class) {
+    const rows = jQuery(obj).jqGrid("getGridParam", "data");
+    for (let i in rows) {
+      if (rows[i][column1] > rows[i][column2]) {
+        jQuery(obj).jqGrid("setCell", rows[i]["id"], column1, "", css_class);
+        jQuery(obj).jqGrid("setCell", rows[i]["id"], column2, "", css_class);
       }
     }
   }
@@ -1575,7 +1625,7 @@ col_model = await jqu.add_link_details(col_model, host + '/html/table_size.html'
               }
               const _cell_val = self.__cell_format(cell_val, format);
 
-              if (t != "") {
+              if (t != "" && _cell_val && t) {
                 cell_val =
                   "<a " +
                   attr +
