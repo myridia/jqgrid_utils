@@ -1553,6 +1553,7 @@ var jqu = new Jqgrid_utils();
 */
   async set_styles(obj, style_column = "styles") {
     const rows = jQuery(obj).jqGrid("getGridParam", "data");
+
     for (let i in rows) {
       if (rows[i][style_column]) {
         const styles = JSON.parse(rows[i][style_column]);
@@ -1560,7 +1561,7 @@ var jqu = new Jqgrid_utils();
           const rowid = rows[i]["id"];
           const name = ii;
           if (rows[i].hasOwnProperty(name)) {
-            jQuery("#grid").jqGrid("setCell", rowid, name, "", styles[ii]);
+            jQuery(obj).jqGrid("setCell", rowid, name, "", styles[ii]);
           }
         }
       }
