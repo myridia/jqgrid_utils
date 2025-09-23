@@ -30,6 +30,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
 
+<<<<<<< HEAD
   "version": "1.34.1"
+=======
+  "version": "1.34.0"
+>>>>>>> a9ee4935e6b3b9c2b697a028ee45457cb1083578
 
 }
