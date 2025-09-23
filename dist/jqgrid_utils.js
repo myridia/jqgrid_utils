@@ -17,6 +17,330 @@ module.exports = class Vanilla_website_utils {
   }
 
   /**
+* Syncron Alias grid_sum_on 
+@alias module:Jqgrid_utils
+*/
+  async _grid_substract_on(
+    grid,
+    minuend = [],
+    subtrahend = [],
+    difference,
+    no_negative = false,
+  ) {
+    return await this.grid_substract_on(
+      grid,
+      minuend,
+      subtrahend,
+      difference,
+      no_negative,
+    );
+  }
+
+  /**
+* Sum the columns values together 
+@alias module:Jqgrid_utils
+@param {object} - Grid Object (required)
+@param {array} - string array list of field_names used as minuend(number from which the other number is subtracted)
+@param {array} - string array list of field_names used as subtrahend(number which is to be subtracted from the minuend)
+@param {string} - string field name for the difference(number which is to be subtracted from the minuend)
+@param {bolen} - true or 1 to not show negative numbers   
+
+@example
+var jqu = new Jqgrid_utils({page:page});
+gridComplete: function () {
+        jqu._jqu._grid_sum_on(this, [
+          "qty_icollect",
+          "qty_ordered",
+          "need_for_qty_ordered",
+          "wait_icollect",
+        ]);
+      },
+*/
+  async grid_substract_on(
+    grid,
+    minuend = [],
+    subtrahend = [],
+    difference,
+    no_negative = false,
+  ) {
+    let $self = jQuery(grid);
+    let rows = $self.jqGrid("getGridParam", "data");
+    let footer = { invdate: "Total" };
+    let _minuend = 0.0;
+    let _subtrahend = 0.0;
+    for (let i in minuend) {
+      let sum = 0;
+      for (let r in rows) {
+        if (rows[r].hasOwnProperty(minuend[i])) {
+          let val = rows[r][minuend[i]];
+          if (typeof val === "string") {
+            if (is_digit(val)) {
+              val = parseFloat(val);
+            }
+          }
+          sum += val;
+        }
+      }
+      if (sum != Math.floor(sum)) {
+        sum = sum.toFixed(2);
+      }
+      footer[minuend[i]] = sum;
+      _minuend = sum;
+    }
+
+    for (let i in subtrahend) {
+      let sum = 0;
+      for (let r in rows) {
+        if (rows[r].hasOwnProperty(subtrahend[i])) {
+          let val = rows[r][subtrahend[i]];
+          if (typeof val === "string") {
+            if (is_digit(val)) {
+              val = parseFloat(val);
+            }
+          }
+          sum += val;
+        }
+      }
+      if (sum != Math.floor(sum)) {
+        sum = sum.toFixed(2);
+      }
+      footer[subtrahend[i]] = sum;
+      _subtrahend = sum;
+    }
+
+    let diff = _minuend - _subtrahend;
+    if (no_negative) {
+      if (diff < 0) {
+        diff = 0;
+      }
+    }
+    footer[difference] = diff;
+
+    $self.jqGrid("footerData", "set", footer);
+
+    return footer;
+  }
+
+  /**
+* Syncron Alias grid_ratio_on 
+@alias module:Jqgrid_utils
+*/
+  _grid_ratio_on(grid, fraction_col, denominator_col, ratio_col) {
+    return this.grid_ratio_on(grid, fraction_col, denominator_col, ratio_col);
+  }
+
+  /**
+* Get the ratio the columns values together 
+@alias module:Jqgrid_utils
+@param {object} - Grid Object (required)
+@param {string} - Column/Field Name for value 1
+@param {string} - Column/Field Name for value 2
+@param {string} - Column/Field Name to the set the target ratio 
+@example
+var jqu = new Jqgrid_utils({page:page});
+      gridComplete: function()
+      {
+       	jqu._grid_ratio_on(this, 'actual_days', 'plan_days', 'qc_eta_ratio');
+      },
+
+*/
+  async grid_ratio_on(grid, fraction_col, denominator_col, ratio_col) {
+    var allrows = jQuery("#grid").jqGrid("getGridParam", "data");
+    let $self = jQuery(grid);
+    let rows = $self.jqGrid("getGridParam", "data");
+    let footer = {
+      invdate: "Total",
+    };
+    let sum = 0;
+    fraction_sum = 0;
+    denominator_sum = 0;
+    ratio_sum = 0;
+    for (let r in rows) {
+      if (rows[r].hasOwnProperty(fraction_col)) {
+        fraction_sum += rows[r][fraction_col];
+      }
+      if (rows[r].hasOwnProperty(denominator_col)) {
+        denominator_sum += rows[r][denominator_col];
+      }
+    }
+    footer["qc_eta_ratio"] = (fraction_sum / denominator_sum).toFixed(2);
+    $self.jqGrid("footerData", "set", footer);
+    return footer;
+  }
+
+  /**
+* Syncron Alias grid_sum_on 
+@alias module:Jqgrid_utils
+*/
+  async _grid_sum_on(grid, fields = []) {
+    return await this.grid_sum_on(grid, fields);
+  }
+
+  /**
+* Sum the columns values together 
+@alias module:Jqgrid_utils
+@param {object} - Grid Object (required)
+@param {string} - Column/Field Name to sum 
+@example
+var jqu = new Jqgrid_utils({page:page});
+gridComplete: function () {
+        jqu._jqu._grid_sum_on(this, [
+          "qty_icollect",
+          "qty_ordered",
+          "need_for_qty_ordered",
+          "wait_icollect",
+        ]);
+      },
+*/
+  async grid_sum_on(grid, fields = []) {
+    let $self = jQuery(grid);
+    let rows = $self.jqGrid("getGridParam", "data");
+    let footer = {
+      invdate: "Total",
+    };
+    for (let i in fields) {
+      let sum = 0;
+      for (let r in rows) {
+        if (rows[r].hasOwnProperty(fields[i])) {
+          let val = rows[r][fields[i]];
+          if (typeof val === "string") {
+            if (is_digit(val)) {
+              val = parseFloat(val);
+            }
+          }
+          sum += val;
+        }
+      }
+      //let number = new Intl.NumberFormat('en-En', { style: 'currency', currency: 'USD' }).format(sum);
+      if (sum != Math.floor(sum)) {
+        sum = sum.toFixed(2);
+      }
+      footer[fields[i]] = sum;
+    }
+    $self.jqGrid("footerData", "set", footer);
+    return footer;
+  }
+
+  /**
+* Syncron Alias grid_avg_on 
+@alias module:Jqgrid_utils
+*/
+  _grid_avg_on(grid, fields = []) {
+    return this.grid_avg_on(grid, fields);
+  }
+
+  /**
+* Average the column values together 
+@alias module:Jqgrid_utils
+@param {object} - Grid Object (required)
+@param {array} - Column/Field Names to where the average of each column should be calculated
+@example
+var jqu = new Jqgrid_utils({page:page});
+
+   gridComplete: function()
+      {
+	jqu._grid_avg_on(this, ['diff_plan_to_actual', 'days_early', 'days_late']);
+      },
+
+
+*/
+
+  async grid_avg_on(grid, fields = []) {
+    let $self = jQuery(grid);
+    let rows = $self.jqGrid("getGridParam", "data");
+    let count = 0;
+    let footer = {
+      invdate: "Total",
+    };
+    for (let i in fields) {
+      let sum = 0;
+      for (let r in rows) {
+        if (rows[r].hasOwnProperty(fields[i])) {
+          let val = rows[r][fields[i]];
+          if (typeof val === "string") {
+            if (is_digit(val)) {
+              val = parseFloat(val);
+            }
+          }
+          sum += val;
+          count++;
+        }
+      }
+      sum = sum / count;
+      if (sum != Math.floor(sum)) {
+        sum = sum.toFixed(2);
+      }
+      footer[fields[i]] = sum;
+    }
+    $self.jqGrid("footerData", "set", footer);
+    return footer;
+  }
+
+  /**
+* Syncron Alias grid_percent_on 
+@alias module:Jqgrid_utils
+*/
+  _grid_percent_on(grid, obj) {
+    return grid_percent_on(grid, obj);
+  }
+
+  /**
+* Percent the columns values together 
+@alias module:Jqgrid_utils
+@param {object} - Grid Object (required)
+@param {string} - Column/Field Name to sum 
+@example
+var jqu = new Jqgrid_utils({page:page});
+gridComplete: function () {
+        jqu._jqu._grid_sum_on(this, [
+          "qty_icollect",
+          "qty_ordered",
+          "need_for_qty_ordered",
+          "wait_icollect",
+        ]);
+      },
+*/
+  async grid_percent_on(grid, obj) {
+    let $self = jQuery(grid);
+    let rows = $self.jqGrid("getGridParam", "data");
+    let footer_sum = {};
+    let id = obj["id"] ? obj["id"] : "invate";
+    footer[id] = "Total";
+    let total = obj["total"];
+    let sums = JSON.parse(JSON.stringify(obj["percent"]));
+    sums.push(total);
+    for (let i in sums) {
+      let field = sums[i];
+      let sum = 0;
+      let _rows = 0;
+      for (let r in rows) {
+        if (rows[r].hasOwnProperty(field)) {
+          let val = rows[r][field];
+          if (typeof val === "string") {
+            if (is_digit(val)) {
+              val = parseFloat(val);
+              sum += val;
+              _rows++;
+            }
+          } else {
+            sum += val;
+            _rows++;
+          }
+        }
+      }
+      footer_sum[field] = sum;
+    }
+
+    for (let i in sums) {
+      let field = sums[i];
+      let percent = footer_sum[field] / (footer_sum[total] / 100);
+      percent = percent.toFixed(2);
+      footer[field] = percent + "%";
+    }
+    $self.jqGrid("footerData", "set", footer);
+  }
+
+  /**
 * Takes the updated columns data and send it to your API post server
 * loadComplete: async function() for the old record needs to be called, see example  !
 @alias module:Jqgrid_utils
@@ -1152,16 +1476,66 @@ col_model = await jqu.add_link_details_csv(col_model, host + '/html/report.html'
 @example 
 loadComplete: async function()
 {
-  await jqu.compare(this,'value','value_report','greenlight');
+  await jqu.compare(this,'first_column','second_column','redlight');
   }
   
 */
-  async compare(obj, column1, column2, style) {
+  async compare(obj, column1, column2, css_class) {
     const rows = jQuery(obj).jqGrid("getGridParam", "data");
     for (let i in rows) {
       if (rows[i][column1] != rows[i][column2]) {
-        jQuery(obj).jqGrid("setCell", rows[i]["id"], column1, "", "greenlight");
-        jQuery(obj).jqGrid("setCell", rows[i]["id"], column2, "", "greenlight");
+        jQuery(obj).jqGrid("setCell", rows[i]["id"], column1, "", css_class);
+        jQuery(obj).jqGrid("setCell", rows[i]["id"], column2, "", css_class);
+      }
+    }
+  }
+
+  /**
+* Compare 2 columns for smaller and give them a style class
+* http://www.trirand.com/jqgridwiki/doku.php?id=wiki:methods
+@alias module:Jqgrid_utils
+@param {object} - grid object
+@param {string} - first column
+@param {string} - second column
+@param {string} - css class name 
+@example 
+loadComplete: async function()
+{
+  await jqu.compare(this,'first_column','second_column','redlight');
+  }
+  
+*/
+  async compare_smaller(obj, column1, column2, css_class) {
+    const rows = jQuery(obj).jqGrid("getGridParam", "data");
+    for (let i in rows) {
+      if (rows[i][column1] < rows[i][column2]) {
+        jQuery(obj).jqGrid("setCell", rows[i]["id"], column1, "", css_class);
+        jQuery(obj).jqGrid("setCell", rows[i]["id"], column2, "", css_class);
+      }
+    }
+  }
+
+  /**
+* Compare 2 columns for bigger and give them a style class
+* http://www.trirand.com/jqgridwiki/doku.php?id=wiki:methods
+@alias module:Jqgrid_utils
+@param {object} - grid object
+@param {string} - first column
+@param {string} - second column
+@param {string} - css class name 
+@example 
+loadComplete: async function()
+{
+  await jqu.compare(this,'first_column','second_column','redlight');
+  }
+  
+*/
+  async compare_bigger(obj, column1, column2, css_class) {
+    const rows = jQuery(obj).jqGrid("getGridParam", "data");
+    for (let i in rows) {
+      if (rows[i][column1] > rows[i][column2]) {
+        jQuery(obj).jqGrid("setCell", rows[i]["id"], column1, "", css_class);
+        jQuery(obj).jqGrid("setCell", rows[i]["id"], column2, "", css_class);
       }
     }
   }
@@ -1179,6 +1553,7 @@ var jqu = new Jqgrid_utils();
 */
   async set_styles(obj, style_column = "styles") {
     const rows = jQuery(obj).jqGrid("getGridParam", "data");
+
     for (let i in rows) {
       if (rows[i][style_column]) {
         const styles = JSON.parse(rows[i][style_column]);
@@ -1186,7 +1561,7 @@ var jqu = new Jqgrid_utils();
           const rowid = rows[i]["id"];
           const name = ii;
           if (rows[i].hasOwnProperty(name)) {
-            jQuery("#grid").jqGrid("setCell", rowid, name, "", styles[ii]);
+            jQuery(obj).jqGrid("setCell", rowid, name, "", styles[ii]);
           }
         }
       }
@@ -1251,7 +1626,7 @@ col_model = await jqu.add_link_details(col_model, host + '/html/table_size.html'
               }
               const _cell_val = self.__cell_format(cell_val, format);
 
-              if (t != "") {
+              if (t != "" && _cell_val && t) {
                 cell_val =
                   "<a " +
                   attr +
