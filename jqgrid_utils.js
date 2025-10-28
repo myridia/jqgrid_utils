@@ -168,6 +168,21 @@ var jqu = new Jqgrid_utils({page:page});
   }
 
   /**
+* Check if the string is html
+@alias module:Jqgrid_utils
+@param {string} - String of any kind
+@returns {boolean} - true or false 
+*/
+  is_html(str) {
+    try {
+      const doc = new DOMParser().parseFromString(str, "text/html");
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  /**
 * Syncron Alias grid_sum_on 
 @alias module:Jqgrid_utils
 */
@@ -200,14 +215,31 @@ gridComplete: function () {
     for (let i in fields) {
       let sum = 0;
       for (let r in rows) {
+        let _val = 0;
         if (rows[r].hasOwnProperty(fields[i])) {
           let val = rows[r][fields[i]];
-          if (typeof val === "string") {
-            if (is_digit(val)) {
-              val = parseFloat(val);
+          if (val) {
+            if (typeof val === "string") {
+              if (this.is_html(val)) {
+                const doc = new DOMParser().parseFromString(val, "text/html");
+                const _a = doc.querySelectorAll("a");
+                const a = Array.from(_a).map((a) => a.text);
+                if (a.length) {
+                  const n = a[0].replace(",", "");
+                  if (is_digit(n)) {
+                    _val = parseFloat(n);
+                  }
+                }
+              } else {
+                if (is_digit(val)) {
+                  _val = parseFloat(val);
+                }
+              }
+            } else if (typeof val === "number") {
+              _val = val;
             }
+            sum += _val;
           }
-          sum += val;
         }
       }
       //let number = new Intl.NumberFormat('en-En', { style: 'currency', currency: 'USD' }).format(sum);
@@ -1564,6 +1596,27 @@ var jqu = new Jqgrid_utils();
           }
         }
       }
+    }
+  }
+
+  /**
+   * Set a class to a row, what must be defined in a dedicated column called row.class
+   * Once the grid is loaded, the functions  adds extra class to the row element
+@alias module:Jqgrid_utils
+@param {object} - grid id like #grid
+@example 
+var jqu = new Jqgrid_utils();
+   loadComplete: async function() {
+     await jqu.set_classes("#grid");
+   },
+*/
+  async set_classes(grid_id) {
+    const rows = jQuery(grid_id).getDataIDs();
+    for (var i = 0; i < rows.length; i = i + 1) {
+      const row = jQuery(grid_id).getRowData(rows[i]);
+      var e = jQuery("#" + rows[i], jQuery(grid_id));
+      e.removeClass("ui-widget-content");
+      e.addClass(row.class);
     }
   }
 
