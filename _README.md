@@ -2,8 +2,6 @@
 
 Convenient Functions for free jqGrid
 
-Published on https://www.npmjs.com/package/jqgrid_utils
-
 # How to install:
 ```bashh
    npm install jqgrid_utils 
