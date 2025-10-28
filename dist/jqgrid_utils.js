@@ -179,7 +179,6 @@ var jqu = new Jqgrid_utils({page:page});
     try {
       const doc = new DOMParser().parseFromString(str, "text/html");
       const a = Array.from(doc.body.childNodes).some((n) => n.nodeType === 1);
-      console.log(a);
       if (a) {
         r = true;
       }
@@ -461,7 +460,7 @@ var jqu = new Jqgrid_utils({page:page});
       Object.keys(row).length > 0 &&
       row.inputData.oper == "add"
     ) {
-      console.log("...add");
+      //console.log("...add");
       for (let i in row.inputData) {
         if (row.inputData[i] && i != "id" && i != "oper") {
           values[i] = row.inputData[i];
