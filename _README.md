@@ -1,4 +1,5 @@
-# Jqgrid_utils
+# ![email_gateway](pages/public/img/logo.png) Jqgrid_utils
+
 Convenient Functions for free jqGrid
 
 # How to install:

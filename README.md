@@ -1,4 +1,5 @@
-# Jqgrid_utils
+# ![email_gateway](pages/public/img/logo.png) Jqgrid_utils
+
 Convenient Functions for free jqGrid
 
 # How to install:
@@ -27,8 +28,11 @@ A module for Jqgrid_utils
 
 
 * [Jqgrid_utils](#module_Jqgrid_utils)
+    * [module.exports#_grid_substract_on()](#exp_module_Jqgrid_utils--module.exports+_grid_substract_on) ⏏
+    * [module.exports#grid_substract_on(grid, minuend, subtrahend, difference, no_negative)](#exp_module_Jqgrid_utils--module.exports+grid_substract_on) ⏏
     * [module.exports#_grid_ratio_on()](#exp_module_Jqgrid_utils--module.exports+_grid_ratio_on) ⏏
     * [module.exports#grid_ratio_on(grid, fraction_col, denominator_col, ratio_col)](#exp_module_Jqgrid_utils--module.exports+grid_ratio_on) ⏏
+    * [module.exports#is_html(str)](#exp_module_Jqgrid_utils--module.exports+is_html) ⇒ <code>boolean</code> ⏏
     * [module.exports#_grid_sum_on()](#exp_module_Jqgrid_utils--module.exports+_grid_sum_on) ⏏
     * [module.exports#grid_sum_on(grid, fields)](#exp_module_Jqgrid_utils--module.exports+grid_sum_on) ⏏
     * [module.exports#_grid_avg_on()](#exp_module_Jqgrid_utils--module.exports+_grid_avg_on) ⏏
@@ -68,8 +72,11 @@ A module for Jqgrid_utils
     * [module.exports#s_hide_del_icon()](#exp_module_Jqgrid_utils--module.exports+s_hide_del_icon) ⏏
     * [module.exports#hide_del_icon()](#exp_module_Jqgrid_utils--module.exports+hide_del_icon) ⏏
     * [module.exports#add_link_details_csv(col_model, url, edit_field, attr, keys, format, seperator)](#exp_module_Jqgrid_utils--module.exports+add_link_details_csv) ⏏
-    * [module.exports#compare(obj, column1, column2, style)](#exp_module_Jqgrid_utils--module.exports+compare) ⏏
+    * [module.exports#compare(obj, column1, column2, css_class)](#exp_module_Jqgrid_utils--module.exports+compare) ⏏
+    * [module.exports#compare_smaller(obj, column1, column2, css_class)](#exp_module_Jqgrid_utils--module.exports+compare_smaller) ⏏
+    * [module.exports#compare_bigger(obj, column1, column2, css_class)](#exp_module_Jqgrid_utils--module.exports+compare_bigger) ⏏
     * [module.exports#set_styles(obj, style_column)](#exp_module_Jqgrid_utils--module.exports+set_styles) ⏏
+    * [module.exports#set_classes(grid_id)](#exp_module_Jqgrid_utils--module.exports+set_classes) ⏏
     * [module.exports#add_link_details(col_model, url, edit_field, attr, keys)](#exp_module_Jqgrid_utils--module.exports+add_link_details) ⏏
     * [module.exports#add_link_details_separator(col_model, url, edit_field, attr, keys)](#exp_module_Jqgrid_utils--module.exports+add_link_details_separator) ⏏
     * [module.exports#add_link_separator(col_model, url, edit_field, fields)](#exp_module_Jqgrid_utils--module.exports+add_link_separator) ⏏
@@ -79,6 +86,39 @@ A module for Jqgrid_utils
     * [module.exports#set_filter(grid, data, fx, append_to)](#exp_module_Jqgrid_utils--module.exports+set_filter) ⏏
     * [module.exports#_filter()](#exp_module_Jqgrid_utils--module.exports+_filter) ⏏
 
+<a name="exp_module_Jqgrid_utils--module.exports+_grid_substract_on"></a>
+
+### module.exports#\_grid\_substract\_on() ⏏
+Syncron Alias grid_sum_on
+
+**Kind**: Exported function  
+<a name="exp_module_Jqgrid_utils--module.exports+grid_substract_on"></a>
+
+### module.exports#grid\_substract\_on(grid, minuend, subtrahend, difference, no_negative) ⏏
+Sum the columns values together
+
+**Kind**: Exported function  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| grid | <code>object</code> |  | Grid Object (required) |
+| minuend | <code>array</code> |  | string array list of field_names used as minuend(number from which the other number is subtracted) |
+| subtrahend | <code>array</code> |  | string array list of field_names used as subtrahend(number which is to be subtracted from the minuend) |
+| difference | <code>string</code> |  | string field name for the difference(number which is to be subtracted from the minuend) |
+| no_negative | <code>bolen</code> | <code>false</code> | true or 1 to not show negative numbers |
+
+**Example**  
+```js
+var jqu = new Jqgrid_utils({page:page});
+gridComplete: function () {
+        jqu._jqu._grid_sum_on(this, [
+          "qty_icollect",
+          "qty_ordered",
+          "need_for_qty_ordered",
+          "wait_icollect",
+        ]);
+      },
+```
 <a name="exp_module_Jqgrid_utils--module.exports+_grid_ratio_on"></a>
 
 ### module.exports#\_grid\_ratio\_on() ⏏
@@ -107,6 +147,18 @@ var jqu = new Jqgrid_utils({page:page});
        	jqu._grid_ratio_on(this, 'actual_days', 'plan_days', 'qc_eta_ratio');
       },
 ```
+<a name="exp_module_Jqgrid_utils--module.exports+is_html"></a>
+
+### module.exports#is\_html(str) ⇒ <code>boolean</code> ⏏
+Check if the string is html
+
+**Kind**: Exported function  
+**Returns**: <code>boolean</code> - - true or false  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| str | <code>string</code> | String of any kind |
+
 <a name="exp_module_Jqgrid_utils--module.exports+_grid_sum_on"></a>
 
 ### module.exports#\_grid\_sum\_on() ⏏
@@ -847,7 +899,7 @@ col_model = await jqu.add_link_details_csv(col_model, host + '/html/report.html'
 ```
 <a name="exp_module_Jqgrid_utils--module.exports+compare"></a>
 
-### module.exports#compare(obj, column1, column2, style) ⏏
+### module.exports#compare(obj, column1, column2, css_class) ⏏
 Compare 2 columns and give them a style class  when they have different content
 http://www.trirand.com/jqgridwiki/doku.php?id=wiki:methods
 
@@ -858,13 +910,57 @@ http://www.trirand.com/jqgridwiki/doku.php?id=wiki:methods
 | obj | <code>object</code> | grid object |
 | column1 | <code>string</code> | first column |
 | column2 | <code>string</code> | second column |
-| style | <code>string</code> | css class name |
+| css_class | <code>string</code> | css class name |
 
 **Example**  
 ```js
 loadComplete: async function()
 {
-  await jqu.compare(this,'value','value_report','greenlight');
+  await jqu.compare(this,'first_column','second_column','redlight');
+  }
+```
+<a name="exp_module_Jqgrid_utils--module.exports+compare_smaller"></a>
+
+### module.exports#compare\_smaller(obj, column1, column2, css_class) ⏏
+Compare 2 columns for smaller and give them a style class
+http://www.trirand.com/jqgridwiki/doku.php?id=wiki:methods
+
+**Kind**: Exported function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| obj | <code>object</code> | grid object |
+| column1 | <code>string</code> | first column |
+| column2 | <code>string</code> | second column |
+| css_class | <code>string</code> | css class name |
+
+**Example**  
+```js
+loadComplete: async function()
+{
+  await jqu.compare(this,'first_column','second_column','redlight');
+  }
+```
+<a name="exp_module_Jqgrid_utils--module.exports+compare_bigger"></a>
+
+### module.exports#compare\_bigger(obj, column1, column2, css_class) ⏏
+Compare 2 columns for bigger and give them a style class
+http://www.trirand.com/jqgridwiki/doku.php?id=wiki:methods
+
+**Kind**: Exported function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| obj | <code>object</code> | grid object |
+| column1 | <code>string</code> | first column |
+| column2 | <code>string</code> | second column |
+| css_class | <code>string</code> | css class name |
+
+**Example**  
+```js
+loadComplete: async function()
+{
+  await jqu.compare(this,'first_column','second_column','redlight');
   }
 ```
 <a name="exp_module_Jqgrid_utils--module.exports+set_styles"></a>
@@ -885,6 +981,25 @@ var jqu = new Jqgrid_utils();
        loadComplete: async function() {
         await jqu.set_styles(this);
         },
+```
+<a name="exp_module_Jqgrid_utils--module.exports+set_classes"></a>
+
+### module.exports#set\_classes(grid_id) ⏏
+Set a class to a row, what must be defined in a dedicated column called row.class
+Once the grid is loaded, the functions  adds extra class to the row element
+
+**Kind**: Exported function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| grid_id | <code>object</code> | grid id like #grid |
+
+**Example**  
+```js
+var jqu = new Jqgrid_utils();
+   loadComplete: async function() {
+     await jqu.set_classes("#grid");
+   },
 ```
 <a name="exp_module_Jqgrid_utils--module.exports+add_link_details"></a>
 
