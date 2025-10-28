@@ -174,12 +174,16 @@ var jqu = new Jqgrid_utils({page:page});
 @returns {boolean} - true or false 
 */
   is_html(str) {
+    let r = false;
     try {
       const doc = new DOMParser().parseFromString(str, "text/html");
-      return true;
-    } catch (err) {
-      return false;
-    }
+      const a = Array.from(doc.body.childNodes).some((n) => n.nodeType === 1);
+      console.log(a);
+      if (a) {
+        r = true;
+      }
+    } catch (err) {}
+    return r;
   }
 
   /**
