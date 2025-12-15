@@ -19,5 +19,9 @@ Convenient Functions for free jqGrid
 
 ```
 
+# Documentation 
+https://github.com/myridia/jqgrid_utils/blob/main/README.md
+
+# Source code:
 Source: https://github.com/myridia/jqgrid_utils/actions
 
