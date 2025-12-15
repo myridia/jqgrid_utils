@@ -28,6 +28,7 @@ A module for Jqgrid_utils
 
 
 * [Jqgrid_utils](#module_Jqgrid_utils)
+    * [module.exports#add_class(col_model, field_name, class_name)](#exp_module_Jqgrid_utils--module.exports+add_class) ⏏
     * [module.exports#_grid_substract_on()](#exp_module_Jqgrid_utils--module.exports+_grid_substract_on) ⏏
     * [module.exports#grid_substract_on(grid, minuend, subtrahend, difference, no_negative)](#exp_module_Jqgrid_utils--module.exports+grid_substract_on) ⏏
     * [module.exports#_grid_ratio_on()](#exp_module_Jqgrid_utils--module.exports+_grid_ratio_on) ⏏
@@ -86,6 +87,24 @@ A module for Jqgrid_utils
     * [module.exports#set_filter(grid, data, fx, append_to)](#exp_module_Jqgrid_utils--module.exports+set_filter) ⏏
     * [module.exports#_filter()](#exp_module_Jqgrid_utils--module.exports+_filter) ⏏
 
+<a name="exp_module_Jqgrid_utils--module.exports+add_class"></a>
+
+### module.exports#add\_class(col_model, field_name, class_name) ⏏
+Add a Class to the Model
+
+**Kind**: Exported function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| col_model | <code>array</code> | grid col_model |
+| field_name | <code>string</code> | column_name |
+| class_name | <code>string</code> | class_name |
+
+**Example**  
+```js
+var jqu = new Jqgrid_utils();
+col_model = await jqu.add_class(col_model,field_name,class_name)
+```
 <a name="exp_module_Jqgrid_utils--module.exports+_grid_substract_on"></a>
 
 ### module.exports#\_grid\_substract\_on() ⏏
