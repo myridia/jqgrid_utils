@@ -16,6 +16,30 @@ module.exports = class Vanilla_website_utils {
   }
 
   /**
+* Add a Class to the Model
+@alias module:Jqgrid_utils
+@param {array}  - grid col_model
+@param {string} - column_name
+@param {string} - class_name
+@example
+var jqu = new Jqgrid_utils();
+col_model = await jqu.add_class(col_model,field_name,class_name)
+*/
+
+  async add_class(col_model, field_name, class_name) {
+    for (let i = 0; i < col_model.length; i++) {
+      if (col_model[i]["name"] === field_name) {
+        if (col_model[i]["classes"]) {
+          col_model[i]["classes"] += " " + class_name;
+        } else {
+          col_model[i]["classes"] = class_name;
+        }
+      }
+    }
+    return col_model;
+  }
+
+  /**
 * Syncron Alias grid_sum_on 
 @alias module:Jqgrid_utils
 */

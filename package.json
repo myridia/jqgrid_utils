@@ -1,14 +1,14 @@
 {
   "author":
   {
-    "name": "veto@myridia.com",
+    "name": "info@myridia.com",
     "url": "https://www.npmjs.com/package/jqgrid_utils"
   },
   "dependencies":
   {},
   "deprecated": false,
   "description": "Convenient Functions for the Free jqGrid",
-  "homepage": "https://github.com/myridia/jqgrid_utils",
+  "homepage": "https://jqgrid-utils.myridia.com",
   "license": "GPL-3.0-or-later",
   "main": "jqgrid_utils.js",
   "name": "jqgrid_utils",
@@ -22,15 +22,10 @@
   ],
   "repository":
   {
-    "type": "hg",
+    "type": "git",
     "url": "https://github.com/myridia/jqgrid_utils"
   },
-  "scripts":
-  {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
 
-  "version": "1.35.2"
-
+  "version": "1.36.0"
 
 }
