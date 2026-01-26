@@ -16,6 +16,27 @@ module.exports = class Vanilla_website_utils {
   }
 
   /**
+* Add a Checkbox to the Model
+@alias module:Jqgrid_utils
+@param {array}  - grid col_model
+@param {string} - column_name
+@example
+var jqu = new Jqgrid_utils();
+ol_model = await jqu.add_checkbox(col_model, "closed");
+*/
+  async add_checkbox(col_model, field_name) {
+    for (let i = 0; i < col_model.length; i++) {
+      if (col_model[i]["name"] === field_name) {
+        col_model[i]["formatter"] = "checkbox";
+        col_model[i]["formatoptions"] = { disabled: false };
+        col_model[i]["edittype"] = "checkbox";
+        col_model[i]["editoptions"] = { value: "Yes:No", defaultValue: "Yes" };
+      }
+    }
+    return col_model;
+  }
+
+  /**
 * Add a Class to the Model
 @alias module:Jqgrid_utils
 @param {array}  - grid col_model
@@ -1637,7 +1658,7 @@ var jqu = new Jqgrid_utils();
      await jqu.set_classes("#grid");
    },
 */
-  async set_classes(grid_id) {
+  async set_classes(grid_id, field) {
     const rows = jQuery(grid_id).getDataIDs();
     for (var i = 0; i < rows.length; i = i + 1) {
       const row = jQuery(grid_id).getRowData(rows[i]);
