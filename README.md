@@ -19,6 +19,10 @@ Convenient Functions for free jqGrid
 
 ```
 
+# Documentation 
+https://github.com/myridia/jqgrid_utils/blob/main/README.md
+
+# Source code:
 Source: https://github.com/myridia/jqgrid_utils/actions
 
 <a name="module_Jqgrid_utils"></a>
@@ -28,6 +32,7 @@ A module for Jqgrid_utils
 
 
 * [Jqgrid_utils](#module_Jqgrid_utils)
+    * [module.exports#add_checkbox(col_model, field_name)](#exp_module_Jqgrid_utils--module.exports+add_checkbox) ⏏
     * [module.exports#add_class(col_model, field_name, class_name)](#exp_module_Jqgrid_utils--module.exports+add_class) ⏏
     * [module.exports#_grid_substract_on()](#exp_module_Jqgrid_utils--module.exports+_grid_substract_on) ⏏
     * [module.exports#grid_substract_on(grid, minuend, subtrahend, difference, no_negative)](#exp_module_Jqgrid_utils--module.exports+grid_substract_on) ⏏
@@ -87,6 +92,23 @@ A module for Jqgrid_utils
     * [module.exports#set_filter(grid, data, fx, append_to)](#exp_module_Jqgrid_utils--module.exports+set_filter) ⏏
     * [module.exports#_filter()](#exp_module_Jqgrid_utils--module.exports+_filter) ⏏
 
+<a name="exp_module_Jqgrid_utils--module.exports+add_checkbox"></a>
+
+### module.exports#add\_checkbox(col_model, field_name) ⏏
+Add a Checkbox to the Model
+
+**Kind**: Exported function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| col_model | <code>array</code> | grid col_model |
+| field_name | <code>string</code> | column_name |
+
+**Example**  
+```js
+var jqu = new Jqgrid_utils();
+ol_model = await jqu.add_checkbox(col_model, "closed");
+```
 <a name="exp_module_Jqgrid_utils--module.exports+add_class"></a>
 
 ### module.exports#add\_class(col_model, field_name, class_name) ⏏
