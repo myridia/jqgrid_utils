@@ -1,7 +1,6 @@
 # ![email_gateway](pages/public/img/logo.png) Jqgrid_utils
 
 Convenient Functions for free jqGrid
-* https://www.npmjs.com/package/jqgrid_utils
 
 # How to install:
 ```bashh
