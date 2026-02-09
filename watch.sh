@@ -1,3 +1,3 @@
 #!/bin/bash
 cp npmignore .npmignore
-watchify jqgrid_utils.js  --s Jqgrid_utils -o dist/jqgrid_utils.js -v
+watchify jqgrid_utils.js  --s Jqgrid_utils -o dist/jqgrid_utils.min.js -v

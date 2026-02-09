@@ -17,6 +17,32 @@ module.exports = class Vanilla_website_utils {
   }
 
   /**
+* Format a number into a currency 
+@alias module:Jqgrid_utils
+@param {object} - col_model of the grid
+@param {string} - name of column to be formatter
+@param {string} - currency symbol, default is $
+@example
+var jqu = new Jqgrid_utils();
+let _data = await jqu.format_currency(this,'my_field','$');
+console.log(_data);
+*/
+  async format_currency(col_model, edit_field, currency = "$") {
+    for (let i = 0; i < col_model.length; i++) {
+      if (col_model[i]["name"] === edit_field) {
+        col_model[i]["formatter"] = "currency";
+        col_model[i]["formatoptions"] = {
+          prefix: currency,
+          decimalSeparator: ".",
+          thousandsSeparator: ",",
+          decimalPlaces: 2,
+        };
+      }
+    }
+    return col_model;
+  }
+
+  /**
 * Add a Checkbox to the Model
 @alias module:Jqgrid_utils
 @param {array}  - grid col_model
