@@ -17,6 +17,65 @@ module.exports = class Vanilla_website_utils {
   }
 
   /**
+* Format a number into a currency  if have value, otherwise return empty 
+@alias module:Jqgrid_utils
+@param {object} - col_model of the grid
+@param {string} - name of column to be formatter
+@param {string} - currency symbol, default is $
+@example
+var jqu = new Jqgrid_utils();
+let _data = await jqu.format_currency(this,'my_field','$');
+console.log(_data);
+*/
+  async format_currency_on_value(col_model, edit_field, currency = "$") {
+    for (let i = 0; i < col_model.length; i++) {
+      if (col_model[i]["name"] === edit_field) {
+        col_model[i]["formatoptions"] = {
+          prefix: currency,
+          decimalSeparator: ".",
+          thousandsSeparator: ",",
+          decimalPlaces: 2,
+        };
+        col_model[i]["formatter"] = function (cellvalue, options, rowObject) {
+          if (
+            cellvalue === null ||
+            cellvalue === undefined ||
+            cellvalue === ""
+          ) {
+            return ""; // Return an empty string for no value
+          } else if (parseFloat(cellvalue) === 0) {
+            return ""; // Return an empty string for zero value
+          } else {
+            // Apply currency formatting
+            var currency = options.colModel.formatoptions.prefix; // Get currency symbol
+            var decimalSeparator =
+              options.colModel.formatoptions.decimalSeparator;
+            var thousandsSeparator =
+              options.colModel.formatoptions.thousandsSeparator;
+            var decimalPlaces = options.colModel.formatoptions.decimalPlaces;
+
+            // Implement your currency formatting logic here
+            // (This is a simplified example; you might need a more robust formatting function)
+            var formattedValue = parseFloat(cellvalue).toFixed(decimalPlaces);
+            formattedValue = formattedValue.replace(".", decimalSeparator);
+
+            // Add thousands separator
+            var parts = formattedValue.split(decimalSeparator);
+            parts[0] = parts[0].replace(
+              /\B(?=(\d{3})+(?!\d))/g,
+              thousandsSeparator,
+            );
+            formattedValue = parts.join(decimalSeparator);
+
+            return currency + formattedValue; // Return formatted value
+          }
+        };
+      }
+    }
+    return col_model;
+  }
+
+  /**
 * Format a number into a currency 
 @alias module:Jqgrid_utils
 @param {object} - col_model of the grid

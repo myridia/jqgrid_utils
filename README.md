@@ -32,6 +32,7 @@ A module for Jqgrid_utils
 
 
 * [Jqgrid_utils](#module_Jqgrid_utils)
+    * [module.exports#format_currency_on_value(col_model, edit_field, currency)](#exp_module_Jqgrid_utils--module.exports+format_currency_on_value) ⏏
     * [module.exports#format_currency(col_model, edit_field, currency)](#exp_module_Jqgrid_utils--module.exports+format_currency) ⏏
     * [module.exports#add_checkbox(col_model, field_name)](#exp_module_Jqgrid_utils--module.exports+add_checkbox) ⏏
     * [module.exports#add_class(col_model, field_name, class_name)](#exp_module_Jqgrid_utils--module.exports+add_class) ⏏
@@ -93,6 +94,25 @@ A module for Jqgrid_utils
     * [module.exports#set_filter(grid, data, fx, append_to)](#exp_module_Jqgrid_utils--module.exports+set_filter) ⏏
     * [module.exports#_filter()](#exp_module_Jqgrid_utils--module.exports+_filter) ⏏
 
+<a name="exp_module_Jqgrid_utils--module.exports+format_currency_on_value"></a>
+
+### module.exports#format\_currency\_on\_value(col_model, edit_field, currency) ⏏
+Format a number into a currency  if have value, otherwise return empty
+
+**Kind**: Exported function  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| col_model | <code>object</code> |  | col_model of the grid |
+| edit_field | <code>string</code> |  | name of column to be formatter |
+| currency | <code>string</code> | <code>&quot;$&quot;</code> | currency symbol, default is $ |
+
+**Example**  
+```js
+var jqu = new Jqgrid_utils();
+let _data = await jqu.format_currency(this,'my_field','$');
+console.log(_data);
+```
 <a name="exp_module_Jqgrid_utils--module.exports+format_currency"></a>
 
 ### module.exports#format\_currency(col_model, edit_field, currency) ⏏
