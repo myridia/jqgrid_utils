@@ -319,8 +319,8 @@ var jqu = new Jqgrid_utils({page:page});
 * Syncron Alias grid_sum_on 
 @alias module:Jqgrid_utils
 */
-  async _grid_sum_on(grid, fields = []) {
-    return await this.grid_sum_on(grid, fields);
+  async _grid_sum_on(grid, fields = [], format = "") {
+    return await this.grid_sum_on(grid, fields, format);
   }
 
   /**
@@ -339,7 +339,8 @@ gridComplete: function () {
         ]);
       },
 */
-  async grid_sum_on(grid, fields = []) {
+  async grid_sum_on(grid, fields = [], format = "") {
+    //console.log(format);
     let $self = jQuery(grid);
     let rows = $self.jqGrid("getGridParam", "data");
     let footer = {
@@ -379,8 +380,14 @@ gridComplete: function () {
       if (sum != Math.floor(sum)) {
         sum = sum.toFixed(2);
       }
-      footer[fields[i]] = sum;
+
+      if (format != "") {
+        footer[fields[i]] = format + "" + this._format_number_with_commas(sum);
+      } else {
+        footer[fields[i]] = sum;
+      }
     }
+
     $self.jqGrid("footerData", "set", footer);
     return footer;
   }
@@ -1996,7 +2003,6 @@ var jqu = new Jqgrid_utils();
       }
     } else if (format == "$") {
       if (cell_value) {
-        console.log(cell_value);
         const number = this._format_number_with_commas(cell_value);
         cell_value = format + "" + number;
       }
