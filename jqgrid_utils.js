@@ -1971,6 +1971,19 @@ var jqu = new Jqgrid_utils();
   /**
 * Private Function
 @alias module:Jqgrid_utils
+@param {string} - number to add comma
+  */
+  _format_number_with_commas(number) {
+    const parts = number.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+  }
+
+  /**
+* Private Function
+@alias module:Jqgrid_utils
+@param {object} - cell_value 
+@param {string} - format_ok or $ sign
 */
   __cell_format(cell_value, format) {
     if (format == "format_ok") {
@@ -1981,7 +1994,14 @@ var jqu = new Jqgrid_utils();
         cell_value =
           '<i data-check="ok" class="fa fa-check-circle" aria-hidden="true" style="color:#008000;"></i>';
       }
+    } else if (format == "$") {
+      if (cell_value) {
+        console.log(cell_value);
+        const number = this._format_number_with_commas(cell_value);
+        cell_value = format + "" + number;
+      }
     }
+
     return cell_value;
   }
 

@@ -88,7 +88,8 @@ A module for Jqgrid_utils
     * [module.exports#add_link_details(col_model, url, edit_field, attr, keys)](#exp_module_Jqgrid_utils--module.exports+add_link_details) ⏏
     * [module.exports#add_link_details_separator(col_model, url, edit_field, attr, keys)](#exp_module_Jqgrid_utils--module.exports+add_link_details_separator) ⏏
     * [module.exports#add_link_separator(col_model, url, edit_field, fields)](#exp_module_Jqgrid_utils--module.exports+add_link_separator) ⏏
-    * [module.exports#__cell_format()](#exp_module_Jqgrid_utils--module.exports+__cell_format) ⏏
+    * [module.exports#_format_number_with_commas(number)](#exp_module_Jqgrid_utils--module.exports+_format_number_with_commas) ⏏
+    * [module.exports#__cell_format(cell_value, format)](#exp_module_Jqgrid_utils--module.exports+__cell_format) ⏏
     * [module.exports#subgrid(_id, id, url, col_model, caption)](#exp_module_Jqgrid_utils--module.exports+subgrid) ⏏
     * [module.exports#add_image(col_model, edit_field, size, link)](#exp_module_Jqgrid_utils--module.exports+add_image) ⏏
     * [module.exports#set_filter(grid, data, fx, append_to)](#exp_module_Jqgrid_utils--module.exports+set_filter) ⏏
@@ -1151,12 +1152,29 @@ var jqu = new Jqgrid_utils();
  //other example
  col_model = await jqu.add_link_separator(col_model, 'https://wiki.salamander-jewelry.net/index.php/grid_loss' , 'e',[{'field':'e'}],'target="_blank"');
 ```
-<a name="exp_module_Jqgrid_utils--module.exports+__cell_format"></a>
+<a name="exp_module_Jqgrid_utils--module.exports+_format_number_with_commas"></a>
 
-### module.exports#\_\_cell\_format() ⏏
+### module.exports#\_format\_number\_with\_commas(number) ⏏
 Private Function
 
 **Kind**: Exported function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| number | <code>string</code> | number to add comma |
+
+<a name="exp_module_Jqgrid_utils--module.exports+__cell_format"></a>
+
+### module.exports#\_\_cell\_format(cell_value, format) ⏏
+Private Function
+
+**Kind**: Exported function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cell_value | <code>object</code> | cell_value |
+| format | <code>string</code> | format_ok or $ sign |
+
 <a name="exp_module_Jqgrid_utils--module.exports+subgrid"></a>
 
 ### module.exports#subgrid(_id, id, url, col_model, caption) ⏏
