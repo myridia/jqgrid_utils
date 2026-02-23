@@ -42,7 +42,7 @@ A module for Jqgrid_utils
     * [module.exports#grid_ratio_on(grid, fraction_col, denominator_col, ratio_col)](#exp_module_Jqgrid_utils--module.exports+grid_ratio_on) ⏏
     * [module.exports#is_html(str)](#exp_module_Jqgrid_utils--module.exports+is_html) ⇒ <code>boolean</code> ⏏
     * [module.exports#_grid_sum_on()](#exp_module_Jqgrid_utils--module.exports+_grid_sum_on) ⏏
-    * [module.exports#grid_sum_on(grid, fields)](#exp_module_Jqgrid_utils--module.exports+grid_sum_on) ⏏
+    * [module.exports#grid_sum_on(grid, fields, format)](#exp_module_Jqgrid_utils--module.exports+grid_sum_on) ⏏
     * [module.exports#_grid_avg_on()](#exp_module_Jqgrid_utils--module.exports+_grid_avg_on) ⏏
     * [module.exports#grid_avg_on(grid, fields)](#exp_module_Jqgrid_utils--module.exports+grid_avg_on) ⏏
     * [module.exports#_grid_percent_on()](#exp_module_Jqgrid_utils--module.exports+_grid_percent_on) ⏏
@@ -249,7 +249,7 @@ Syncron Alias grid_sum_on
 **Kind**: Exported function  
 <a name="exp_module_Jqgrid_utils--module.exports+grid_sum_on"></a>
 
-### module.exports#grid\_sum\_on(grid, fields) ⏏
+### module.exports#grid\_sum\_on(grid, fields, format) ⏏
 Sum the columns values together
 
 **Kind**: Exported function  
@@ -258,6 +258,7 @@ Sum the columns values together
 | --- | --- | --- |
 | grid | <code>object</code> | Grid Object (required) |
 | fields | <code>string</code> | Column/Field Name to sum |
+| format | <code>string</code> | format, currency sign |
 
 **Example**  
 ```js

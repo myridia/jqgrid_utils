@@ -328,7 +328,8 @@ var jqu = new Jqgrid_utils({page:page});
 * Sum the columns values together 
 @alias module:Jqgrid_utils
 @param {object} - Grid Object (required)
-@param {string} - Column/Field Name to sum 
+@param {string} - Column/Field Name to sum
+@param {string} - format, currency sign 
 @example
 var jqu = new Jqgrid_utils({page:page});
 gridComplete: function () {
