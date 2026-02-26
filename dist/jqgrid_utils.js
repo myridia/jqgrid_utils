@@ -320,8 +320,8 @@ var jqu = new Jqgrid_utils({page:page});
 * Syncron Alias grid_sum_on 
 @alias module:Jqgrid_utils
 */
-  async _grid_sum_on(grid, fields = [], format = "") {
-    return await this.grid_sum_on(grid, fields, format);
+  async _grid_sum_on(grid, fields = [], format = "", exclude = []) {
+    return await this.grid_sum_on(grid, fields, format, exclude);
   }
 
   /**
@@ -329,7 +329,8 @@ var jqu = new Jqgrid_utils({page:page});
 @alias module:Jqgrid_utils
 @param {object} - Grid Object (required)
 @param {string} - Column/Field Name to sum
-@param {string} - format, currency sign 
+@param {string} - format, currency sign
+@param {array} - exclude, array of column field key:value object, example [{"user": "foo"}] - it excludes user with value foo 
 @example
 var jqu = new Jqgrid_utils({page:page});
 gridComplete: function () {
@@ -338,10 +339,13 @@ gridComplete: function () {
           "qty_ordered",
           "need_for_qty_ordered",
           "wait_icollect",
-        ]);
+          ]
+          "$",
+          [{user:"foo",country:"None"}]
+          );
       },
 */
-  async grid_sum_on(grid, fields = [], format = "") {
+  async grid_sum_on(grid, fields = [], format = "", exclude = []) {
     //console.log(format);
     let $self = jQuery(grid);
     let rows = $self.jqGrid("getGridParam", "data");
@@ -354,7 +358,19 @@ gridComplete: function () {
         let _val = 0;
         if (rows[r].hasOwnProperty(fields[i])) {
           let val = rows[r][fields[i]];
-          if (val) {
+          let include = true;
+
+          for (let x = 0; x < exclude.length; x++) {
+            for (let e in exclude[x]) {
+              //console.log(exclude[x][e] + " <> " + rows[r][e]);
+              if (rows[r][e] === exclude[x][e]) {
+                include = false;
+                break;
+              }
+            }
+          }
+
+          if (val && include) {
             if (typeof val === "string") {
               if (this.is_html(val)) {
                 const doc = new DOMParser().parseFromString(val, "text/html");
