@@ -880,7 +880,11 @@ console.log(_data);
 */
   _date112_to_DMY(cell_value, seperator = "/") {
     let value = cell_value;
-    if (cell_value.length >= 8 && cell_value.indexOf(seperator) === -1) {
+    cell_value = String(cell_value);
+    if (
+      cell_value.trim().length >= 8 &&
+      cell_value.trim().indexOf(seperator) === -1
+    ) {
       let a = [];
       a.push(cell_value.substr(6, 2));
       a.push(cell_value.substr(4, 2));
@@ -905,7 +909,11 @@ console.log(_data);
     for (let i = 0; i < col_model.length; i++) {
       if (col_model[i]["name"] === edit_field) {
         col_model[i]["formatter"] = function (cell_value, o) {
-          if (cell_value) {
+          cell_value = String(cell_value);
+          if (
+            cell_value.trim().length >= 8 &&
+            cell_value.trim().indexOf(seperator) === -1
+          ) {
             cell_value = cell_value.toString();
             let value = cell_value;
             if (
