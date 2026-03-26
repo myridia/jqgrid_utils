@@ -129,7 +129,7 @@ If you encounter any issues or have questions about `jqgrid_utils`, please open 
 
 ## Add Repository
 ```
-git remote add codeberg ssh://git@codeberg.org/jqgrid_utils.git
+git remote add codeberg ssh://git@codeberg.org/veto/jqgrid_utils.git
 git push codeberg
 
 ## Jqgrid\_utils
