@@ -126,6 +126,12 @@ If you encounter any issues or have questions about `jqgrid_utils`, please open 
 
 <a name="module_Jqgrid_utils"></a>
 
+
+## Add Repository
+```
+git remote add codeberg ssh://git@codeberg.org/jqgrid_utils.git
+git push codeberg
+
 ## Jqgrid\_utils
 
 A module for Jqgrid_utils
