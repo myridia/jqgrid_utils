@@ -164,6 +164,7 @@ A module for Jqgrid_utils
     * [module.exports#binary_replace(cell_value, a, b)](#exp_module_Jqgrid_utils--module.exports+binary_replace) ⏏
     * [module.exports#_date112_to_DMY(cell_value, seperator)](#exp_module_Jqgrid_utils--module.exports+_date112_to_DMY) ⏏
     * [module.exports#date112_to_DMY(col_model, edit_field, seperator)](#exp_module_Jqgrid_utils--module.exports+date112_to_DMY) ⏏
+    * [module.exports#set_col_model(col_model, edit_field, key, value)](#exp_module_Jqgrid_utils--module.exports+set_col_model) ⏏
     * [module.exports#add_formatter(col_model, edit_field, formatter)](#exp_module_Jqgrid_utils--module.exports+add_formatter) ⏏
     * [module.exports#natural_sort(col_model, column_name)](#exp_module_Jqgrid_utils--module.exports+natural_sort) ⇒ <code>array</code> ⏏
     * [module.exports#add_html_formatter(col_model, edit_field, html)](#exp_module_Jqgrid_utils--module.exports+add_html_formatter) ⇒ <code>array</code> ⏏
@@ -654,6 +655,30 @@ Convert a 112 date to a DMY format with sepertaor
 var jqu = new Jqgrid_utils();
 let _data = await jqu.date112_to_DMY(this,'field','/');
 console.log(_data);
+```
+<a name="exp_module_Jqgrid_utils--module.exports+set_col_model"></a>
+
+### module.exports#set\_col\_model(col_model, edit_field, key, value) ⏏
+Set col_model
+
+**Kind**: Exported function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| col_model | <code>array</code> | grid col_model |
+| edit_field | <code>string</code> | string columns names what will be formatted |
+| key | <code>string</code> | key of the model |
+| value | <code>string</code> | value of the model |
+
+**Example**  
+```js
+var jqu = new Jqgrid_utils();
+    col_model = await jqu.set_col_model(
+      col_model,
+      "to_close",
+      "editable",
+      true,
+    );
 ```
 <a name="exp_module_Jqgrid_utils--module.exports+add_formatter"></a>
 
