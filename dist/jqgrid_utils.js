@@ -938,6 +938,34 @@ console.log(_data);
   }
 
   /**
+* Set col_model
+@alias module:Jqgrid_utils
+@param {array}  - grid col_model
+@param {string} - string columns names what will be formatted
+@param {string} - key of the model
+@param {string} - value of the model
+
+@example
+var jqu = new Jqgrid_utils();
+    col_model = await jqu.set_col_model(
+      col_model,
+      "to_close",
+      "editable",
+      true,
+    );
+
+*/
+
+  async set_col_model(col_model, edit_field, key, value) {
+    for (let i = 0; i < col_model.length; i++) {
+      if (col_model[i]["name"] === edit_field) {
+        col_model[i][key] = value;
+      }
+    }
+    return col_model;
+  }
+
+  /**
 * Add Formatter 
 @alias module:Jqgrid_utils
 @param {array}  - grid col_model
