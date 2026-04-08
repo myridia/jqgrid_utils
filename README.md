@@ -150,7 +150,7 @@ A module for Jqgrid_utils
     * [module.exports#grid_ratio_on(grid, fraction_col, denominator_col, ratio_col)](#exp_module_Jqgrid_utils--module.exports+grid_ratio_on) ⏏
     * [module.exports#is_html(str)](#exp_module_Jqgrid_utils--module.exports+is_html) ⇒ <code>boolean</code> ⏏
     * [module.exports#_grid_sum_on()](#exp_module_Jqgrid_utils--module.exports+_grid_sum_on) ⏏
-    * [module.exports#grid_sum_on(grid, fields, format, exclude)](#exp_module_Jqgrid_utils--module.exports+grid_sum_on) ⏏
+    * [module.exports#grid_sum_on(grid, fields, format, exclude, unique)](#exp_module_Jqgrid_utils--module.exports+grid_sum_on) ⏏
     * [module.exports#_grid_avg_on()](#exp_module_Jqgrid_utils--module.exports+_grid_avg_on) ⏏
     * [module.exports#grid_avg_on(grid, fields)](#exp_module_Jqgrid_utils--module.exports+grid_avg_on) ⏏
     * [module.exports#_grid_percent_on()](#exp_module_Jqgrid_utils--module.exports+_grid_percent_on) ⏏
@@ -358,7 +358,7 @@ Syncron Alias grid_sum_on
 **Kind**: Exported function  
 <a name="exp_module_Jqgrid_utils--module.exports+grid_sum_on"></a>
 
-### module.exports#grid\_sum\_on(grid, fields, format, exclude) ⏏
+### module.exports#grid\_sum\_on(grid, fields, format, exclude, unique) ⏏
 Sum the columns values together
 
 **Kind**: Exported function  
@@ -369,6 +369,7 @@ Sum the columns values together
 | fields | <code>string</code> | Column/Field Name to sum |
 | format | <code>string</code> | format, currency sign |
 | exclude | <code>array</code> | exclude, array of column field key:value object, example [{"user": "foo"}] - it excludes user with value foo |
+| unique | <code>string</code> | unique, sum only unique from this column |
 
 **Example**  
 ```js
@@ -381,7 +382,8 @@ gridComplete: function () {
           "wait_icollect",
           ]
           "$",
-          [{user:"foo",country:"None"}]
+          [{user:"foo",country:"None"}],
+          "column_name_customer"
           );
       },
 ```
