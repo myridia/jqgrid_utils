@@ -329,7 +329,8 @@ var jqu = new Jqgrid_utils({page:page});
 @param {object} - Grid Object (required)
 @param {string} - Column/Field Name to sum
 @param {string} - format, currency sign
-@param {array} - exclude, array of column field key:value object, example [{"user": "foo"}] - it excludes user with value foo 
+@param {array} - exclude, array of column field key:value object, example [{"user": "foo"}] - it excludes user with value foo
+@param {string} - unique, sum only unique from this column 
 @example
 var jqu = new Jqgrid_utils({page:page});
 gridComplete: function () {
@@ -340,21 +341,30 @@ gridComplete: function () {
           "wait_icollect",
           ]
           "$",
-          [{user:"foo",country:"None"}]
+          [{user:"foo",country:"None"}],
+          "column_name_customer"
           );
       },
 */
-  async grid_sum_on(grid, fields = [], format = "", exclude = []) {
+  async grid_sum_on(grid, fields = [], format = "", exclude = [], unique = "") {
     //console.log(format);
     let $self = jQuery(grid);
     let rows = $self.jqGrid("getGridParam", "data");
     let footer = {
       invdate: "Total",
     };
+
     for (let i in fields) {
       let sum = 0;
+      let u = [];
       for (let r in rows) {
+        if (unique != "") {
+          if (u.includes(rows[r][unique])) {
+            continue;
+          }
+        }
         let _val = 0;
+
         if (rows[r].hasOwnProperty(fields[i])) {
           let val = rows[r][fields[i]];
           let include = true;
@@ -391,6 +401,9 @@ gridComplete: function () {
             }
             sum += _val;
           }
+        }
+        if (unique != "") {
+          u.push(rows[r][unique]);
         }
       }
       //let number = new Intl.NumberFormat('en-En', { style: 'currency', currency: 'USD' }).format(sum);
